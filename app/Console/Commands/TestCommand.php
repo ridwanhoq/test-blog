@@ -38,6 +38,6 @@ class TestCommand extends Command
     public function handle()
     {
         // return 0;
-        dd(now('America')->toTimeString()); 
+        dd(now('America/New_York')->format('H:i')); 
     }
 }

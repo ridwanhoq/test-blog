@@ -24,7 +24,7 @@ class VoteApiController extends Controller
 
         try {
 
-            $this->checkVoteTimeExpires($pollQuestionId);
+            $this->checkVoteEndTimeNotExpires($pollQuestionId);
 
             $this->repo->store([
                 'start_time' => request()->start_time
@@ -39,7 +39,7 @@ class VoteApiController extends Controller
     {
     }
 
-    private function checkVoteTimeExpires($pollQuestionId)
+    private function checkVoteEndTimeNotExpires($pollQuestionId)
     {
 
         $usaOrLocalTime = request()->is_usa_time == 1 ? $this->getCurrentUsaTime() : $this->getCurrentLocalTime();
@@ -48,7 +48,7 @@ class VoteApiController extends Controller
             ->whereHas('pollQuestion', function ($pollQuestion) use ($pollQuestionId) {
                 $pollQuestion->where('id', $pollQuestionId);
             })
-            ->where('end_time', '<', $usaOrLocalTime)
+            ->where('end_time', '>', $usaOrLocalTime)
             ->first();
 
         if (empty($poll)) {
@@ -60,13 +60,16 @@ class VoteApiController extends Controller
 
     public function getCurrentUsaTime()
     {
-        return now('America/News_York')->toTimeString();
+        return now('America/News_York')->format('H:i');
     }
 
     public function getCurrentLocalTime()
     {
         $user = auth()->user();
-        
-        return '07:00';
+
+        $userCountryName    =  $user->country->name ?? '';
+        $userStateName      =  $user->state->name ?? '';
+
+        return now($userCountryName . '/' . $userStateName)->format('H:i');
     }
 }
