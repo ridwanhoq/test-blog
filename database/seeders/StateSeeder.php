@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class StateSeeder extends Seeder
 {
@@ -13,6 +14,7 @@ class StateSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $states_sql = realpath(__DIR__.'../catalogs/states.sql');
+        DB::unprepared(file_get_contents($states_sql));
     }
 }
