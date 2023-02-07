@@ -48,7 +48,7 @@ class VoteApiController extends Controller
             ->whereHas('pollQuestion', function ($pollQuestion) use ($pollQuestionId) {
                 $pollQuestion->where('id', $pollQuestionId);
             })
-            ->where('end_time', '>', $usaOrLocalTime)
+            ->where('end_time', '>', $usaOrLocalTime)   
             ->first();
 
         if (empty($poll)) {
@@ -60,7 +60,7 @@ class VoteApiController extends Controller
 
     public function getCurrentUsaTime()
     {
-        return now('America/News_York')->format('H:i');
+        return now('America/New_York')->format('H:i');
     }
 
     public function getCurrentLocalTime()
@@ -72,4 +72,9 @@ class VoteApiController extends Controller
 
         return now($userCountryName . '/' . $userStateName)->format('H:i');
     }
+
+    public function matchUserPollSubmissionWithPublicAnswers(){
+        
+    }
+
 }
