@@ -20,5 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'v1'], function(){
-    Route::resource('votes', VoteApiController::class);
+    Route::controller(VoteApiController::class)->group(function(){
+        Route::post('poll-question-own-response-submit/{poll-question-id}', 'pollQuestionOwnResponseSubmit');
+    });
+    
 });
