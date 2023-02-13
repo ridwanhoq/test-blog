@@ -79,6 +79,9 @@ function checkLoginState() {
 
 -----------------------------
 
+ridwanhoque.riseuplabs@gmail.com
+D4
+
 facebook
 app-id : 575456097765847
 secret : 136ce7aa6719430cba0a30b78be9127b
