@@ -14,12 +14,12 @@ class AddGeoToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('countries');
-            $table->unsignedBigInteger('state_id');
-            $table->foreign('state_id')->references('id')->on('states');
-            $table->unsignedBigInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities');
+            // $table->unsignedBigInteger('country_id');
+            // $table->foreign('country_id')->references('id')->on('countries');
+            // $table->unsignedBigInteger('state_id');
+            // $table->foreign('state_id')->references('id')->on('states');
+            // $table->unsignedBigInteger('city_id');
+            // $table->foreign('city_id')->references('id')->on('cities');
         });
     }
 

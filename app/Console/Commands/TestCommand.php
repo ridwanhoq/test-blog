@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\NotificationController;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -38,6 +39,7 @@ class TestCommand extends Command
     public function handle()
     {
         // return 0;
-        dd(now('America/New_York')->format('H:i')); 
+        // dd(now('America/New_York')->format('H:i'));
+        return (new NotificationController())->sendNotification();
     }
 }
