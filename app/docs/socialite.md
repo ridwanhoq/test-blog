@@ -89,3 +89,25 @@ secret : 136ce7aa6719430cba0a30b78be9127b
 google
 368956610470-akq7sibm221ea26v7cn42cfene424cs8.apps.googleusercontent.com
 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
+------------------------------------------------------------------------------------
+
+$client = new \PulkitJalan\Google\Client(['client_id' => 'YOUR_CLIENT_ID', 'client_secret' => 'YOUR_SECRET', 'redirect_uri' => 'YOUR_REDIRECT_URI', 'developer_key' => 'YOUR_KEY']);
+$google = $client->getClient();
+$google->authenticate($token);
+$access_token = $client->getAccessToken()["access_token"];
+
+//and now here you go
+$user = Socialize::driver('google')->userFromToken($access_token);
+
+--------------------------------------------------------------------------------------
+
+$client = new Google_Client([
+    'client_id' => config('services.google.client_id'),
+    'client_secret' => config('services.google.client_secret')
+]);
+
+$data = $client->fetchAccessTokenWithAuthCode($code);
+
+$user = Socialite::driver('google')->scopes(['profile','email'])->userFromToken($data['access_token']);
+
+--------------------------------------------------------------------------------------
